@@ -17,7 +17,7 @@ sudo dd status=progress bs=16M if=/dev/nvme0n1 | lbzip2 --compress --fast > /pat
 Pipe decompressed image into dd and out to your device.
 
 ```
-lbzip --decompress --stdout /path/to/backup.img.lbzip2 | sudo dd status=progress bs=16M of=/dev/nvme0n1
+lbzip2 --decompress --stdout /path/to/backup.img.lbzip2 | sudo dd status=progress bs=16M of=/dev/nvme0n1
 ```
 
 ## Split by max file size
@@ -25,7 +25,7 @@ lbzip --decompress --stdout /path/to/backup.img.lbzip2 | sudo dd status=progress
 If you're backing up disks you might be backing up to multiple media or to a filesystem with file size limits. Here is how to make a new file every 2GiB.
 
 ```
-sudo dd status=progress bs=16M if=/dev/nvme0n1 | lbzip2 --compress --fast | split --bytes=2G - /path/to/backup.img.lbzip2.
+sudo dd status=progress bs=16M if=/dev/nvme0n1 | lbzip2 --compress --fast | split --bytes=2G - /path/to/backup.img.lbzip2-
 ```
 In this example if the device contains more than 2G of compressed data you'd have multiple files in `/path/to` with each file beginning with `backup.img.lbzip2.` followed by a hex id.
 
